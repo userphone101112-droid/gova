@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1781291906756,
+      "tag": "0000_rich_wolf_cub",
+      "breakpoints": true
+    }
+  ]
+}
