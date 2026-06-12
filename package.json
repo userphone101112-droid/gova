@@ -19,7 +19,11 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "validate:ssot": "tsx packages/shared/scripts/validate-ssot.ts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "git:setup": "powershell -ExecutionPolicy Bypass -File ./gv.ps1 -Setup",
+    "git:push": "powershell -ExecutionPolicy Bypass -File ./gv.ps1 -Push",
+    "git:pull": "powershell -ExecutionPolicy Bypass -File ./gv.ps1 -Pull",
+    "git:status": "powershell -ExecutionPolicy Bypass -File ./gv.ps1 -Status"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
