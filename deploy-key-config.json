@@ -1,0 +1,24 @@
+{
+  "deployKey": {
+    "description": "Deploy Key Configuration for gova",
+    "publicKey": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDf2V5QqX1MlNsLR+mas0J/bLMVhIf2x4/EUFQBB1EO2 hesham@DESKTOP-UA52GFH",
+    "privateKeyFile": ".git_deploy_key",
+    "publicKeyFile": ".git_deploy_key.pub",
+    "localSSHPath": "~/.ssh_local/gova",
+    "repository": "userphone101112-droid/gova",
+    "created": "2026-06-12",
+    "instructions": {
+      "step1": "أضف المفتاح العام إلى GitHub Deploy Keys",
+      "step1_url": "https://github.com/userphone101112-droid/gova/settings/keys",
+      "step2": "نسخ المفتاح الخاص إلى: ~/.ssh_local/gova/",
+      "step3": "تشغيل البرنامج النصي: setup-deploy-key.ps1 -Setup",
+      "step4": "اختبار الاتصال: setup-deploy-key.ps1 -Test"
+    },
+    "features": [
+      "✅ محفوظ محلياً في المشروع",
+      "✅ لا يحتاج إلى إعدادات Windows عامة",
+      "✅ يعمل على أي جهاز بعد نسخ المفاتيح",
+      "✅ آمن - المفاتيح الخاصة مخفية في .gitignore"
+    ]
+  }
+}
