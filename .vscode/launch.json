@@ -1,0 +1,55 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "▶ Next.js Dev Server",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "serverReadyAction": {
+        "pattern": "ready on|Local:.*http",
+        "uriFormat": "http://localhost:3000",
+        "action": "openExternally"
+      }
+    },
+    {
+      "name": "🔧 git:setup  — Configure SSH (isolated from Windows)",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/gv.ps1", "-Setup"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "⬆ git:push   — Push to origin/main",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/gv.ps1", "-Push"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "⬇ git:pull   — Pull from origin/main",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/gv.ps1", "-Pull"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "📋 git:status — Show git status & local config",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/gv.ps1", "-Status"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    }
+  ]
+}

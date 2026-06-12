@@ -1,0 +1,69 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "▶ dev",
+      "type": "npm",
+      "script": "dev",
+      "group": { "kind": "build", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "dedicated" },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔧 git:setup — Configure SSH (isolated from Windows)",
+      "type": "npm",
+      "script": "git:setup",
+      "group": "none",
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    },
+    {
+      "label": "⬆ git:push — Push to origin/main",
+      "type": "npm",
+      "script": "git:push",
+      "group": "none",
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    },
+    {
+      "label": "⬇ git:pull — Pull from origin/main",
+      "type": "npm",
+      "script": "git:pull",
+      "group": "none",
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    },
+    {
+      "label": "📋 git:status — Show git status & local config",
+      "type": "npm",
+      "script": "git:status",
+      "group": "none",
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    },
+    {
+      "label": "🧪 test",
+      "type": "npm",
+      "script": "test",
+      "group": { "kind": "test", "isDefault": true },
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": []
+    },
+    {
+      "label": "🔍 lint",
+      "type": "npm",
+      "script": "lint",
+      "group": "none",
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": ["$eslint-stylish"]
+    },
+    {
+      "label": "✅ typecheck",
+      "type": "npm",
+      "script": "typecheck",
+      "group": "none",
+      "presentation": { "reveal": "always", "panel": "shared" },
+      "problemMatcher": ["$tsc"]
+    }
+  ]
+}
