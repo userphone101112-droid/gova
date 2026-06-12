@@ -35,16 +35,34 @@
       "@/types/*": ["./src/types/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/configs/*": ["./src/configs/*"],
-      "@/server/*": ["./src/server/*"]
+      "@/server/*": ["./src/server/*"],
+      "@gv/theme": ["./packages/theme/index.ts"],
+      "@gv/translations": ["./packages/translations/index.ts"],
+      "@gv/branding": ["./packages/branding/index.ts"],
+      "@gv/localization": ["./packages/localization/index.ts"],
+      "@gv/design-system": ["./packages/design-system/index.tsx"],
+      "@gv/contracts": ["./packages/contracts/index.ts"],
+      "@gv/domain": ["./packages/domain/index.ts"],
+      "@gv/schemas": ["./packages/schemas/index.ts"],
+      "@gv/auth": ["./packages/auth/index.ts"],
+      "@gv/features": ["./packages/features/index.ts"],
+      "@gv/storage": ["./packages/storage/index.ts"],
+      "@gv/business-rules": ["./packages/business-rules/index.ts"],
+      "@gv/config": ["./packages/config/index.ts"],
+      "@gv/formatting": ["./packages/formatting/index.ts"],
+      "@gv/shared-types": ["./packages/shared-types/index.ts"],
+      "@gv/shared": ["./packages/shared/index.ts"]
     }
   },
   "include": [
     "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "apps"]
 }

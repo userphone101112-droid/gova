@@ -1,6 +1,6 @@
 /**
  * Store Types
- * 
+ *
  * TypeScript types for all store slices.
  */
 
@@ -25,12 +25,9 @@ export interface DataState {
   error: string | null;
 }
 
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-  avatar?: string;
-}
+import type { UserResponseDTO } from '@gv/contracts';
+
+export type User = UserResponseDTO;
 
 export interface Notification {
   id: string;

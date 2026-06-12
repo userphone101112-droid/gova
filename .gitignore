@@ -53,6 +53,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+packages/**/*.js
+packages/**/*.d.ts
+packages/**/*.js.map
+packages/**/*.d.ts.map
+
 
 # Deploy Keys (LOCAL - DO NOT SHARE)
 .git_deploy_key
