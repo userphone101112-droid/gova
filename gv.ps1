@@ -8,7 +8,8 @@ param(
     [switch]$Pull,
     [switch]$Status,
     [string]$Message = "",
-    [switch]$Help
+    [switch]$Help,
+    [switch]$NoVerify
 )
 
 $KEY_FILE = "$env:USERPROFILE\.ssh_local\gova\.git_deploy_key"
@@ -55,19 +56,13 @@ function Run-Setup {
 function Run-Push {
     if (-not (Verify-Key)) { return }
 
-    # Stage all changes if a commit message is provided
-    if ($Message -ne "") {
-        Write-Host "Staging all changes..." -ForegroundColor Cyan
-        git add -A
-        Write-Host "Committing: $Message" -ForegroundColor Cyan
-        git commit -m $Message
-        if ($LASTEXITCODE -ne 0) {
-            Write-Host "[INFO] Nothing new to commit, pushing existing commits..." -ForegroundColor Yellow
-        }
-    }
-
     Write-Host "Pushing to origin/main..." -ForegroundColor Cyan
-    $output = git push origin main 2>&1
+    if ($NoVerify) {
+        Write-Host "[INFO] Skipping pre-commit and pre-push hooks..." -ForegroundColor Yellow
+        $output = git push --no-verify origin main 2>&1
+    } else {
+        $output = git push origin main 2>&1
+    }
     Write-Host $output
 
     if ($output -match "main -> main" -or $output -match "up-to-date") {
@@ -100,11 +95,11 @@ function Show-Help {
 gova Git Helper (isolated from Windows SSH/credential settings)
 
 Usage:
-    .\gv.ps1 -Setup                          Configure SSH deploy key locally
-    .\gv.ps1 -Push                           Push current commits to origin/main
-    .\gv.ps1 -Push -Message "your message"  Stage all, commit, then push
-    .\gv.ps1 -Pull                           Pull latest from origin/main
-    .\gv.ps1 -Status                         Show git status and local config
+    .\gv.ps1 -Setup              Configure SSH deploy key locally
+    .\gv.ps1 -Push               Push current commits to origin/main
+    .\gv.ps1 -Push -NoVerify      Push without pre-commit/pre-push hooks
+    .\gv.ps1 -Pull               Pull latest from origin/main
+    .\gv.ps1 -Status             Show git status and local config
 
 "@
 }

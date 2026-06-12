@@ -1,0 +1,17 @@
+{
+  "name": "@gv/navigation-ssot",
+  "version": "1.0.0",
+  "description": "Single Source of Truth for all platform navigation",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "validate": "tsx scripts/validate-navigation.ts"
+  },
+  "keywords": [
+    "ssot",
+    "navigation",
+    "governance"
+  ],
+  "author": "GV Platform Team",
+  "license": "MIT"
+}

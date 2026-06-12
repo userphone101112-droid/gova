@@ -67,6 +67,58 @@ jobs:
       - name: Run tests
         run: npm test
 
+  validate-docs:
+    name: Validate Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate documentation governance
+        run: npm run validate:docs
+
+      - name: Validate documentation links
+        run: npm run validate:links
+
+  validate-governance:
+    name: Validate Governance
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate comprehensive governance
+        run: npm run validate:governance:comprehensive
+
+      - name: Run SSOT doctor
+        run: npm run ssot:doctor
+
+      - name: Detect architecture drift
+        run: npm run detect:drift
+
+      - name: Calculate governance score
+        run: npm run governance:score
+
   build:
     name: Build
     runs-on: ubuntu-latest

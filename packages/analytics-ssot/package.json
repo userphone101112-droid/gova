@@ -1,0 +1,17 @@
+{
+  "name": "@gv/analytics-ssot",
+  "version": "1.0.0",
+  "description": "Single Source of Truth for all platform analytics events",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "validate": "tsx scripts/validate-analytics.ts"
+  },
+  "keywords": [
+    "ssot",
+    "analytics",
+    "governance"
+  ],
+  "author": "GV Platform Team",
+  "license": "MIT"
+}

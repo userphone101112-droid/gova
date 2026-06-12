@@ -1,0 +1,17 @@
+{
+  "name": "@gv/governance-ssot",
+  "version": "1.0.0",
+  "description": "Single Source of Truth for all platform governance",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "validate": "tsx scripts/validate-governance-ssot.ts"
+  },
+  "keywords": [
+    "ssot",
+    "governance",
+    "compliance"
+  ],
+  "author": "GV Platform Team",
+  "license": "MIT"
+}

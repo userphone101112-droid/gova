@@ -1,0 +1,17 @@
+{
+  "name": "@gv/permissions-ssot",
+  "version": "1.0.0",
+  "description": "Single Source of Truth for all platform permissions",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "validate": "tsx scripts/validate-permissions.ts"
+  },
+  "keywords": [
+    "ssot",
+    "permissions",
+    "governance"
+  ],
+  "author": "GV Platform Team",
+  "license": "MIT"
+}

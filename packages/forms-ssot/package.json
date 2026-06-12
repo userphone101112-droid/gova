@@ -1,0 +1,17 @@
+{
+  "name": "@gv/forms-ssot",
+  "version": "1.0.0",
+  "description": "Single Source of Truth for all platform forms",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "validate": "tsx scripts/validate-forms.ts"
+  },
+  "keywords": [
+    "ssot",
+    "forms",
+    "governance"
+  ],
+  "author": "GV Platform Team",
+  "license": "MIT"
+}

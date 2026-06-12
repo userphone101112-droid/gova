@@ -1,0 +1,73 @@
+name: Nightly Governance Audit
+
+on:
+  schedule:
+    # Run daily at 2:00 AM UTC
+    - cron: '0 2 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  governance-audit:
+    name: Governance Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run comprehensive governance validation
+        run: npm run validate:governance:comprehensive
+
+      - name: Run SSOT doctor
+        run: npm run ssot:doctor
+
+      - name: Detect architecture drift
+        run: npm run detect:drift
+
+      - name: Calculate governance score
+        run: npm run governance:score
+
+      - name: Run self-healing
+        run: npm run governance:self-heal
+
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: governance-audit-report
+          path: |
+            docs/audits/nightly/
+          retention-days: 30
+
+      - name: Create audit summary
+        if: always()
+        run: |
+          mkdir -p docs/audits/nightly
+          echo "# Nightly Governance Audit Report" > docs/audits/nightly/$(date +%Y-%m-%d).md
+          echo "" >> docs/audits/nightly/$(date +%Y-%m-%d).md
+          echo "**Date:** $(date)" >> docs/audits/nightly/$(date +%Y-%m-%d).md
+          echo "**Commit:** ${{ github.sha }}" >> docs/audits/nightly/$(date +%Y-%m-%d).md
+          echo "" >> docs/audits/nightly/$(date +%Y-%m-%d).md
+          echo "## Validation Results" >> docs/audits/nightly/$(date +%Y-%m-%d).md
+          echo "- Governance Validation: ${{ job.status }}" >> docs/audits/nightly/$(date +%Y-%m-%d).md
+          echo "- SSOT Doctor: ${{ job.status }}" >> docs/audits/nightly/$(date +%Y-%m-%d).md
+          echo "- Drift Detection: ${{ job.status }}" >> docs/audits/nightly/$(date +%Y-%m-%d).md
+          echo "- Governance Score: ${{ job.status }}" >> docs/audits/nightly/$(date +%Y-%m-%d).md
+
+      - name: Commit audit report
+        if: always()
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add docs/audits/nightly/
+          git diff --quiet && git diff --staged --quiet || git commit -m "chore: nightly governance audit report [skip ci]"
+          git push

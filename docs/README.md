@@ -68,6 +68,33 @@ Full architecture: [docs/architecture/system-overview.md](./architecture/system-
 - Active plans: [docs/planning/active-plans/](./planning/active-plans/)
 - In-progress tasks: [docs/tracking/in-progress.md](./tracking/in-progress.md)
 - Open bugs: [docs/tracking/bugs/open.md](./tracking/bugs/open.md)
+- In-progress features: [docs/tracking/features/in-progress.md](./tracking/features/in-progress.md)
+
+---
+
+## 📊 Tracking Structure
+
+### Task Tracking
+- [backlog.md](./tracking/backlog.md) - Planned tasks
+- [in-progress.md](./tracking/in-progress.md) - Currently in progress
+- [blocked.md](./tracking/blocked.md) - Blocked tasks
+- [completed.md](./tracking/completed.md) - Completed tasks
+- [future-ideas.md](./tracking/future-ideas.md) - Future ideas
+
+### Bug Tracking
+- [bugs/open.md](./tracking/bugs/open.md) - Open bugs
+- [bugs/fixed.md](./tracking/bugs/fixed.md) - Fixed bugs
+- [bugs/known-issues.md](./tracking/bugs/known-issues.md) - Known issues with workarounds
+- [bugs/regressions.md](./tracking/bugs/regressions.md) - Regressions
+
+### Feature Tracking
+- [features/planned.md](./tracking/features/planned.md) - Planned features
+- [features/in-progress.md](./tracking/features/in-progress.md) - In-progress features
+- [features/completed.md](./tracking/features/completed.md) - Completed features
+- [features/deprecated.md](./tracking/features/deprecated.md) - Deprecated features
+
+### Code Changes
+- [code-changes/](./tracking/code-changes/) - Code change traceability
 
 ---
 

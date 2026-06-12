@@ -1,0 +1,17 @@
+{
+  "name": "@gv/features-ssot",
+  "version": "1.0.0",
+  "description": "Single Source of Truth for all platform features",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "validate": "tsx scripts/validate-features.ts"
+  },
+  "keywords": [
+    "ssot",
+    "features",
+    "governance"
+  ],
+  "author": "GV Platform Team",
+  "license": "MIT"
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@gv/pages-ssot",
+  "version": "1.0.0",
+  "description": "Single Source of Truth for all platform pages",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "validate": "tsx scripts/validate-pages.ts"
+  },
+  "keywords": [
+    "ssot",
+    "pages",
+    "governance"
+  ],
+  "author": "GV Platform Team",
+  "license": "MIT"
+}

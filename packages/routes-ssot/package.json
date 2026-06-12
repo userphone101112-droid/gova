@@ -1,0 +1,17 @@
+{
+  "name": "@gv/routes-ssot",
+  "version": "1.0.0",
+  "description": "Single Source of Truth for all platform routes",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "validate": "tsx scripts/validate-routes.ts"
+  },
+  "keywords": [
+    "ssot",
+    "routes",
+    "governance"
+  ],
+  "author": "GV Platform Team",
+  "license": "MIT"
+}
