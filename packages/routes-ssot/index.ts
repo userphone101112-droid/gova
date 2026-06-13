@@ -104,7 +104,7 @@ export const routeRegistry: Record<string, RouteDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  productsList: {
+  'products-list': {
     id: 'products-list',
     path: '/products',
     page: 'products-list',
@@ -121,7 +121,7 @@ export const routeRegistry: Record<string, RouteDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  productDetails: {
+  'product-details': {
     id: 'product-details',
     path: '/products/[id]',
     page: 'product-details',
@@ -136,7 +136,7 @@ export const routeRegistry: Record<string, RouteDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  productCreate: {
+  'product-create': {
     id: 'product-create',
     path: '/products/new',
     page: 'product-create',
@@ -175,7 +175,7 @@ export const routeRegistry: Record<string, RouteDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  ordersList: {
+  'orders-list': {
     id: 'orders-list',
     path: '/orders',
     page: 'orders-list',
@@ -192,7 +192,7 @@ export const routeRegistry: Record<string, RouteDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  orderDetails: {
+  'order-details': {
     id: 'order-details',
     path: '/orders/[id]',
     page: 'order-details',
@@ -207,7 +207,7 @@ export const routeRegistry: Record<string, RouteDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  merchantProfile: {
+  'merchant-profile': {
     id: 'merchant-profile',
     path: '/merchants/[id]',
     page: 'merchant-profile',
@@ -222,7 +222,7 @@ export const routeRegistry: Record<string, RouteDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  merchantDashboard: {
+  'merchant-dashboard': {
     id: 'merchant-dashboard',
     path: '/merchants/dashboard',
     page: 'merchant-dashboard',
@@ -235,7 +235,7 @@ export const routeRegistry: Record<string, RouteDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  adminDashboard: {
+  'admin-dashboard': {
     id: 'admin-dashboard',
     path: '/admin',
     page: 'admin-dashboard',
@@ -247,6 +247,32 @@ export const routeRegistry: Record<string, RouteDefinition> = {
     version: '1.0.0',
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
+  },
+  'seller-dashboard': {
+    id: 'seller-dashboard',
+    path: '/seller/dashboard',
+    page: 'seller-dashboard',
+    feature: 'merchants',
+    params: undefined,
+    query: undefined,
+    permissions: ['merchant.write', 'marketplace.read'],
+    public: false,
+    version: '1.0.0',
+    createdAt: '2026-06-13T02:00:00.000Z',
+    updatedAt: '2026-06-13T02:00:00.000Z',
+  },
+  notifications: {
+    id: 'notifications',
+    path: '/notifications',
+    page: 'notifications',
+    feature: 'notifications',
+    params: undefined,
+    query: undefined,
+    permissions: ['notification.read', 'marketplace.read'],
+    public: false,
+    version: '1.0.0',
+    createdAt: '2026-06-13T02:00:00.000Z',
+    updatedAt: '2026-06-13T02:00:00.000Z',
   },
 };
 
@@ -369,7 +395,7 @@ export function buildRoute(routeId: string, params?: Record<string, string>, que
 
   // Replace dynamic parameters
   if (route.params) {
-    for (const [key, value] of Object.entries(route.params)) {
+    for (const [key] of Object.entries(route.params)) {
       if (params && params[key]) {
         path = path.replace(`[${key}]`, params[key]);
       } else {
@@ -408,6 +434,8 @@ export const routes = {
   merchantProfile: (params: { id: string }) => buildRoute('merchant-profile', params),
   merchantDashboard: () => buildRoute('merchant-dashboard'),
   adminDashboard: () => buildRoute('admin-dashboard'),
+  sellerDashboard: () => buildRoute('seller-dashboard'),
+  notifications: () => buildRoute('notifications'),
 };
 
 // ============================================================================

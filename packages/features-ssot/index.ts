@@ -248,7 +248,7 @@ export const featureRegistry: Record<string, FeatureDefinition> = {
     owner: 'Commerce Team',
     status: 'in_development',
     permissions: ['marketplace.read'],
-    routes: ['/home', '/cart', '/seller/dashboard', '/admin/dashboard', '/notifications', '/profile'],
+    routes: ['home', 'cart', 'seller-dashboard', 'admin-dashboard', 'notifications', 'profile'],
     forms: [],
     analyticsEvents: ['navigation.click', 'navigation.view'],
     documentationRefs: ['/docs/modules/marketplace-navigation.md'],
@@ -256,7 +256,7 @@ export const featureRegistry: Record<string, FeatureDefinition> = {
     dependencies: ['users', 'products', 'merchants', 'orders', 'notifications'],
     version: '0.1.0',
     createdAt: '2026-06-13T01:10:00.000Z',
-    updatedAt: '2026-06-13T01:10:00.000Z',
+    updatedAt: '2026-06-13T02:00:00.000Z',
   },
 };
 

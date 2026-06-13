@@ -57,6 +57,14 @@ export const dictionaries = {
       invalidType: 'Invalid file type. Only JPEG, PNG, WEBP, GIF, and SVG are supported',
       tooLarge: 'Image is too large. Maximum size is 5MB',
     },
+    marketplace: {
+      home: 'Home',
+      cart: 'Cart',
+      dashboard: 'Dashboard',
+      admin: 'Admin',
+      notifications: 'Notifications',
+      profile: 'Profile',
+    },
   },
   ar: {
     common: {
@@ -113,6 +121,14 @@ export const dictionaries = {
       deleteSuccess: 'تم حذف الصورة بنجاح',
       invalidType: 'نوع الملف غير صالح. يتم دعم ملفات JPEG و PNG و WEBP و GIF و SVG فقط',
       tooLarge: 'حجم الصورة كبير جداً. الحد الأقصى هو 5 ميجابايت',
+    },
+    marketplace: {
+      home: 'الرئيسية',
+      cart: 'السلة',
+      dashboard: 'لوحة التحكم',
+      admin: 'المسؤول',
+      notifications: 'الإشعارات',
+      profile: 'الملف الشخصي',
     },
   },
 };

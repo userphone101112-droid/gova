@@ -172,7 +172,7 @@ export const pageRegistry: Record<string, PageDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  productsList: {
+  'products-list': {
     id: 'products-list',
     feature: 'products',
     route: '/products',
@@ -194,7 +194,7 @@ export const pageRegistry: Record<string, PageDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  productDetails: {
+  'product-details': {
     id: 'product-details',
     feature: 'products',
     route: '/products/[id]',
@@ -216,7 +216,7 @@ export const pageRegistry: Record<string, PageDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  productCreate: {
+  'product-create': {
     id: 'product-create',
     feature: 'products',
     route: '/products/new',
@@ -282,7 +282,7 @@ export const pageRegistry: Record<string, PageDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  ordersList: {
+  'orders-list': {
     id: 'orders-list',
     feature: 'orders',
     route: '/orders',
@@ -304,7 +304,7 @@ export const pageRegistry: Record<string, PageDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  orderDetails: {
+  'order-details': {
     id: 'order-details',
     feature: 'orders',
     route: '/orders/[id]',
@@ -326,7 +326,7 @@ export const pageRegistry: Record<string, PageDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  merchantProfile: {
+  'merchant-profile': {
     id: 'merchant-profile',
     feature: 'merchants',
     route: '/merchants/[id]',
@@ -348,7 +348,7 @@ export const pageRegistry: Record<string, PageDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  merchantDashboard: {
+  'merchant-dashboard': {
     id: 'merchant-dashboard',
     feature: 'merchants',
     route: '/merchants/dashboard',
@@ -370,7 +370,7 @@ export const pageRegistry: Record<string, PageDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  adminDashboard: {
+  'admin-dashboard': {
     id: 'admin-dashboard',
     feature: 'admin',
     route: '/admin',
@@ -392,7 +392,51 @@ export const pageRegistry: Record<string, PageDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
-  rootLayout: {
+  'seller-dashboard': {
+    id: 'seller-dashboard',
+    feature: 'merchants',
+    route: '/seller/dashboard',
+    title: 'Seller Dashboard',
+    description: 'Seller management dashboard',
+    type: 'page',
+    permissions: ['merchant.write', 'marketplace.read'],
+    seo: {
+      title: 'GV Platform - Seller Dashboard',
+      description: 'Manage your store',
+      keywords: [],
+    },
+    translations: ['merchants.dashboard'],
+    contracts: ['MerchantResponseDTO'],
+    schemas: [],
+    analyticsEvents: ['page.view.seller-dashboard'],
+    documentationRefs: ['/docs/pages/seller-dashboard.md'],
+    version: '1.0.0',
+    createdAt: '2026-06-13T01:25:00.000Z',
+    updatedAt: '2026-06-13T01:25:00.000Z',
+  },
+  notifications: {
+    id: 'notifications',
+    feature: 'notifications',
+    route: '/notifications',
+    title: 'Notifications',
+    description: 'Notifications center',
+    type: 'page',
+    permissions: ['notification.read', 'marketplace.read'],
+    seo: {
+      title: 'GV Platform - Notifications',
+      description: 'View your notifications',
+      keywords: [],
+    },
+    translations: ['notifications.title'],
+    contracts: [],
+    schemas: [],
+    analyticsEvents: ['page.view.notifications'],
+    documentationRefs: ['/docs/pages/notifications.md'],
+    version: '1.0.0',
+    createdAt: '2026-06-13T01:25:00.000Z',
+    updatedAt: '2026-06-13T01:25:00.000Z',
+  },
+  'root-layout': {
     id: 'root-layout',
     feature: 'users',
     route: '/',
