@@ -1,5 +1,5 @@
 // Root Layout Integration Points
-// Phase 1: Navigation Foundation
+// Phase 1.5: Foundation Remediation
 
 // This file provides integration points for the marketplace navigation system
 // to be integrated into the Next.js App Router root layout.
@@ -30,27 +30,13 @@ export function createAuthAdapter(authSystem: 'nextauth' | 'clerk' | 'custom'): 
 function createNextAuthAdapter(): AuthAdapter {
   return {
     getRole: () => {
-      // Implement NextAuth session retrieval
-      if (typeof window !== 'undefined') {
-        // @ts-ignore - NextAuth session
-        const session = window.session;
-        return session?.user?.role || null;
-      }
-      return null;
+      throw new Error('NextAuth adapter not implemented. Implement NextAuth session retrieval in createNextAuthAdapter().');
     },
     getPermissions: () => {
-      // Implement NextAuth permissions retrieval
-      if (typeof window !== 'undefined') {
-        // @ts-ignore - NextAuth session
-        const session = window.session;
-        return session?.user?.permissions || [];
-      }
-      return [];
+      throw new Error('NextAuth adapter not implemented. Implement NextAuth permissions retrieval in createNextAuthAdapter().');
     },
     onAuthChange: () => {
-      // Implement NextAuth auth change listener
-      // This would typically use NextAuth's event system
-      return () => {};
+      throw new Error('NextAuth adapter not implemented. Implement NextAuth auth change listener in createNextAuthAdapter().');
     },
   };
 }
@@ -58,28 +44,13 @@ function createNextAuthAdapter(): AuthAdapter {
 function createClerkAdapter(): AuthAdapter {
   return {
     getRole: () => {
-      // Implement Clerk session retrieval
-      if (typeof window !== 'undefined' && (window as any).clerk) {
-        const user = (window as any).clerk.user;
-        return user?.publicMetadata?.role || null;
-      }
-      return null;
+      throw new Error('Clerk adapter not implemented. Implement Clerk session retrieval in createClerkAdapter().');
     },
     getPermissions: () => {
-      // Implement Clerk permissions retrieval
-      if (typeof window !== 'undefined' && (window as any).clerk) {
-        const user = (window as any).clerk.user;
-        return user?.publicMetadata?.permissions || [];
-      }
-      return [];
+      throw new Error('Clerk adapter not implemented. Implement Clerk permissions retrieval in createClerkAdapter().');
     },
     onAuthChange: () => {
-      // Implement Clerk auth change listener
-      if (typeof window !== 'undefined' && (window as any).clerk) {
-        const clerk = (window as any).clerk;
-        return clerk.addListener((_user: any) => {});
-      }
-      return () => {};
+      throw new Error('Clerk adapter not implemented. Implement Clerk auth change listener in createClerkAdapter().');
     },
   };
 }
@@ -87,24 +58,13 @@ function createClerkAdapter(): AuthAdapter {
 function createCustomAdapter(): AuthAdapter {
   return {
     getRole: () => {
-      // Implement custom auth system
-      if (typeof window !== 'undefined') {
-        const user = (window as any).user;
-        return user?.role || null;
-      }
-      return null;
+      throw new Error('Custom adapter not implemented. Implement custom auth system in createCustomAdapter().');
     },
     getPermissions: () => {
-      // Implement custom permissions retrieval
-      if (typeof window !== 'undefined') {
-        const user = (window as any).user;
-        return user?.permissions || [];
-      }
-      return [];
+      throw new Error('Custom adapter not implemented. Implement custom permissions retrieval in createCustomAdapter().');
     },
     onAuthChange: () => {
-      // Implement custom auth change listener
-      return () => {};
+      throw new Error('Custom adapter not implemented. Implement custom auth change listener in createCustomAdapter().');
     },
   };
 }
@@ -115,15 +75,15 @@ function createCustomAdapter(): AuthAdapter {
 
 /**
  * Integration instructions for root layout
- * 
+ *
  * To integrate marketplace navigation into your root layout (src/app/layout.tsx):
- * 
+ *
  * 1. Import the provider:
  *    import { MarketplaceNavigationProvider } from '@/components/marketplace/providers/MarketplaceNavigationProvider';
- * 
+ *
  * 2. Create an auth adapter:
  *    const authAdapter = createAuthAdapter('nextauth'); // or 'clerk' or 'custom'
- * 
+ *
  * 3. Wrap your app with the provider:
  *    <MarketplaceNavigationProvider
  *      navigationId="marketplace"
@@ -133,54 +93,3 @@ function createCustomAdapter(): AuthAdapter {
  *      {children}
  *    </MarketplaceNavigationProvider>
  */
-
-// ============================================================================
-// SERVER-SIDE INTEGRATION HELPERS
-// ============================================================================
-
-/**
- * Server-side helper to get navigation configuration
- * This can be used in server components to pre-fetch navigation data
- */
-export async function getServerSideNavigationConfig(navigationId: string = 'marketplace') {
-  // This would call the SSOT integration layer on the server
-  // For now, return a placeholder
-  return {
-    navigationId,
-    config: {
-      type: 'sidebar',
-      mode: 'sticky',
-      theme: 'dynamic',
-    },
-  };
-}
-
-/**
- * Server-side helper to get user permissions
- * This can be used in server components to pre-fetch user permissions
- */
-export async function getServerSideUserPermissions(_userId: string): Promise<string[]> {
-  // This would call your auth system on the server
-  // For now, return an empty array
-  return [];
-}
-
-// ============================================================================
-// MIDDLEWARE INTEGRATION
-// ============================================================================
-
-/**
- * Middleware helper to protect marketplace routes
- * Usage in src/middleware.ts:
- * 
- * import { protectMarketplaceRoute } from '@/app/layout-integration';
- * 
- * export function middleware(request: NextRequest) {
- *   return protectMarketplaceRoute(request, '/seller/dashboard');
- * }
- */
-export function protectMarketplaceRoute(_request: Request, _routePath: string) {
-  // This would implement route protection logic
-  // For now, return null to allow access
-  return null;
-}

@@ -1,12 +1,12 @@
 // Marketplace Navigation Provider
-// Phase 1: Navigation Foundation
+// Phase 1.5: Foundation Remediation
 
 'use client';
 
 import React, { useEffect } from 'react';
 import { NavigationProvider } from '@/context/NavigationContext';
 import { useNavigationContext } from '@/context/NavigationContext';
-import { resolveNavigationForUser } from '@/lib/marketplace/ssot-integration';
+import { resolveNavigation, resolveNavigationForUser } from '@/lib/marketplace/ssot-integration';
 import type { NavbarConfig, SSOTNavigationItem } from '@/types/marketplace/navigation.types';
 
 // ============================================================================
@@ -17,7 +17,7 @@ interface MarketplaceNavigationProviderProps {
   children: React.ReactNode;
   config?: Partial<NavbarConfig>;
   navigationId?: string;
-  authAdapter?: {
+  authAdapter: {
     getRole: () => string | null;
     getPermissions: () => string[];
     onAuthChange?: (callback: (user: any) => void) => () => void;
@@ -49,7 +49,7 @@ export function MarketplaceNavigationProvider({
 interface MarketplaceNavigationInitializerProps {
   children: React.ReactNode;
   navigationId: string;
-  authAdapter?: MarketplaceNavigationProviderProps['authAdapter'];
+  authAdapter: MarketplaceNavigationProviderProps['authAdapter'];
 }
 
 function MarketplaceNavigationInitializer({
@@ -68,9 +68,8 @@ function MarketplaceNavigationInitializer({
           cacheTTL: 300000,
         });
 
-        if (result.success && result.data) {
-          actions.setPermissions?.(result.data.permissions || []);
-          // Note: Navigation items will be loaded based on user permissions
+        if (result.exists) {
+          // Navigation structure exists, items will be loaded based on user permissions
         }
       } catch (error) {
         console.error('Failed to initialize navigation:', error);
@@ -82,8 +81,6 @@ function MarketplaceNavigationInitializer({
 
   // Initialize authentication state
   useEffect(() => {
-    if (!authAdapter) return;
-
     const initializeAuth = () => {
       try {
         const role = authAdapter.getRole();
@@ -166,49 +163,3 @@ export interface AuthAdapter {
   onAuthChange?: (callback: (user: any) => void) => () => void;
 }
 
-// ============================================================================
-// DEFAULT AUTH ADAPTER
-// ============================================================================
-
-export const defaultAuthAdapter: AuthAdapter = {
-  getRole: () => {
-    // Default implementation - should be overridden
-    if (typeof window !== 'undefined') {
-      const user = (window as any).user;
-      return user?.role || null;
-    }
-    return null;
-  },
-
-  getPermissions: () => {
-    // Default implementation - should be overridden
-    if (typeof window !== 'undefined') {
-      const user = (window as any).user;
-      return user?.permissions || [];
-    }
-    return [];
-  },
-
-  onAuthChange: () => {
-    // Default implementation - no auth change listener
-    return () => {};
-  },
-};
-
-// ============================================================================
-// HELPER FUNCTIONS
-// ============================================================================
-
-function resolveNavigation(
-  _navigationId: string,
-  _config: { enableCaching: boolean; cacheTTL: number }
-) {
-  // This would call the SSOT integration layer
-  // For now, return a mock result
-  return {
-    success: true,
-    data: {
-      permissions: [],
-    },
-  };
-}

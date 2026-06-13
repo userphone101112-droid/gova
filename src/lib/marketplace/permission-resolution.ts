@@ -1,5 +1,5 @@
 // Permission Resolution Layer
-// Phase 1: Navigation Foundation
+// Phase 1.5: Foundation Remediation
 
 import { resolvePermission, resolveRolePermissions } from './ssot-integration';
 import type { PermissionResolutionResult } from '@/types/marketplace/navigation.types';
@@ -90,73 +90,15 @@ export class PermissionResolutionService {
 }
 
 // ============================================================================
-// ROLE PERMISSION CONSTANTS
-// ============================================================================
-
-export const ROLE_PERMISSIONS: Record<string, string[]> = {
-  buyer: [
-    'user:read',
-    'user:write',
-    'product:read',
-    'order:read',
-    'cart:read',
-    'cart:write',
-    'checkout:write',
-    'merchant:read',
-    'notification:read',
-    'marketplace:read',
-  ],
-  seller: [
-    'user:read',
-    'user:write',
-    'product:read',
-    'product:write',
-    'product:delete',
-    'order:read',
-    'order:write',
-    'cart:read',
-    'cart:write',
-    'checkout:write',
-    'merchant:read',
-    'merchant:write',
-    'notification:read',
-    'marketplace:read',
-  ],
-  admin: [
-    'user:read',
-    'user:write',
-    'user:delete',
-    'product:read',
-    'product:write',
-    'product:delete',
-    'order:read',
-    'order:write',
-    'cart:read',
-    'cart:write',
-    'checkout:write',
-    'merchant:read',
-    'merchant:write',
-    'admin:read',
-    'admin:write',
-    'notification:read',
-    'marketplace:read',
-  ],
-  guest: [
-    'product:read',
-    'merchant:read',
-  ],
-};
-
-// ============================================================================
 // PERMISSION HELPERS
 // ============================================================================
 
 export const permissionHelpers = {
   /**
-   * Get permissions for a role
+   * Get permissions for a role from permissions-ssot
    */
   getPermissions: (role: string): string[] => {
-    return ROLE_PERMISSIONS[role as keyof typeof ROLE_PERMISSIONS] || [];
+    return resolveRolePermissions(role);
   },
 
   /**
