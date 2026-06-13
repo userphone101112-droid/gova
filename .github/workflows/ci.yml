@@ -119,6 +119,9 @@ jobs:
       - name: Calculate governance score
         run: npm run governance:score
 
+      - name: Validate governance gate
+        run: npm run governance:preflight
+
   build:
     name: Build
     runs-on: ubuntu-latest

@@ -16,7 +16,7 @@
       }
     },
     {
-      "name": "🔧 git:setup  — Configure SSH (${env:USERNAME} ${env:DATE} ${env:TIME})",
+      "name": "🔧 git:setup  — Configure SSH",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "powershell",
@@ -25,7 +25,7 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "⬆ git:push   — Push to origin/main (${env:USERNAME} ${env:DATE} ${env:TIME})",
+      "name": "⬆ git:push   — Push to origin/main",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "powershell",
@@ -34,7 +34,7 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "⬇ git:pull   — Pull from origin/main (${env:USERNAME} ${env:DATE} ${env:TIME})",
+      "name": "⬇ git:pull   — Pull from origin/main",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "powershell",
@@ -43,7 +43,7 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "📋 git:status — Show git status & local config (${env:USERNAME} ${env:DATE} ${env:TIME})",
+      "name": "📋 git:status — Show git status & local config",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "powershell",
@@ -52,7 +52,7 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "⬆ git:push -NoVerify — Push without checks (${env:USERNAME} ${env:DATE} ${env:TIME})",
+      "name": "⬆ git:push -NoVerify — Push without checks",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "powershell",
@@ -61,7 +61,7 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "⬆ git:commitAndPush — Stage, check, commit, push (${env:USERNAME} ${env:DATE} ${env:TIME})",
+      "name": "⬆ git:commitAndPush — Stage, check, commit, push",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "powershell",

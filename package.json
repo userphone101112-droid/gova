@@ -43,6 +43,7 @@
     "governance:plan": "tsx packages/governance-gate/cli/index.ts create",
     "governance:approve": "tsx packages/governance-gate/cli/index.ts approve",
     "governance:preflight": "tsx packages/governance-gate/cli/index.ts preflight",
+    "governance:audit-gates": "tsx scripts/governance/audit-gates.ts",
     "validate:all": "npm run validate:features && npm run validate:pages && npm run validate:routes && npm run validate:navigation && npm run validate:forms && npm run validate:permissions && npm run validate:analytics && npm run validate:governance",
     "prepare": "husky",
     "git:setup": "powershell -ExecutionPolicy Bypass -File ./gv.ps1 -Setup",

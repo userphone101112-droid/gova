@@ -16,14 +16,69 @@ This document defines the mandatory contract that all AI agents (Antigravity, Cl
 
 By operating in this repository, AI agents agree to:
 
-1. **Discover related SSOT before implementing anything**
-2. **Update authoritative SSOT before writing implementation code**
-3. **Validate SSOT changes before proceeding**
-4. **Implement changes only after SSOT is updated**
-5. **Update documentation for all changes**
-6. **Update changelog for significant changes**
-7. **Run governance validation before completing**
-8. **Produce compliance report for all changes**
+1. **Run Governance Gate BEFORE implementing anything**
+2. **Discover related SSOT before implementing anything**
+3. **Update authoritative SSOT before writing implementation code**
+4. **Validate SSOT changes before proceeding**
+5. **Implement changes only after SSOT is updated**
+6. **Update documentation for all changes**
+7. **Update changelog for significant changes**
+8. **Run governance validation before completing**
+9. **Produce compliance report for all changes**
+
+---
+
+## Governance Gate Requirement
+
+**AI agents MUST run Governance Gate before ANY implementation.**
+
+### Step 0: Run Governance Gate
+
+Before implementing ANY change, AI agents MUST:
+
+```bash
+npm run governance:plan -- \
+  --title "Change Title" \
+  --description "Change description" \
+  --requester "agent-name"
+```
+
+This will:
+
+- Generate a Gate ID (e.g., GATE-2026-0001)
+- Classify the change type
+- Determine affected SSOTs
+- Resolve required workflow
+- Generate implementation checklist
+- Determine required approvals
+
+### Gate Approval Required
+
+AI agents MUST:
+
+- Review the generated governance plan
+- Wait for gate approval (if required)
+- Run preflight validation
+- Only then proceed to implementation
+
+### Gate ID in Commits
+
+AI agents MUST include the Gate ID in all commit messages:
+
+```
+feat: implement new feature [GATE-2026-0001]
+
+This commit implements the feature approved in GATE-2026-0001.
+```
+
+### Gate ID in PRs
+
+AI agents MUST include the Gate ID in all PR descriptions:
+
+```
+## Governance Gate ID
+GATE-2026-0001
+```
 
 ---
 
@@ -43,14 +98,14 @@ const affectedSSOTs = discoverAffectedSSOTs(changeType);
 
 **Affected SSOTs by change type:**
 
-| Change Type | Required SSOTs |
-|-------------|----------------|
-| New Feature | features-ssot, contracts, schemas, permissions-ssot, translations |
-| New Page | pages-ssot, routes-ssot, navigation-ssot, permissions-ssot, translations |
-| New API | contracts, schemas, domain |
-| New Form | forms-ssot, schemas, permissions-ssot, translations |
-| New Permission | permissions-ssot |
-| New Analytics Event | analytics-ssot |
+| Change Type         | Required SSOTs                                                           |
+| ------------------- | ------------------------------------------------------------------------ |
+| New Feature         | features-ssot, contracts, schemas, permissions-ssot, translations        |
+| New Page            | pages-ssot, routes-ssot, navigation-ssot, permissions-ssot, translations |
+| New API             | contracts, schemas, domain                                               |
+| New Form            | forms-ssot, schemas, permissions-ssot, translations                      |
+| New Permission      | permissions-ssot                                                         |
+| New Analytics Event | analytics-ssot                                                           |
 
 ### Step 2: Update Authoritative SSOT
 
@@ -67,6 +122,7 @@ featureRegistry['new-feature'] = {
 ```
 
 **SSOT Update Order:**
+
 1. Feature SSOT (if applicable)
 2. Contracts SSOT
 3. Schemas SSOT
@@ -102,6 +158,7 @@ import { getSchema } from '@gv/schemas';
 
 ```markdown
 # Update relevant documentation
+
 - docs/packages/<package-name>.md
 - docs/modules/<module-name>.md
 - docs/architecture/<architecture-name>.md
@@ -111,6 +168,7 @@ import { getSchema } from '@gv/schemas';
 
 ```markdown
 # Update relevant changelog
+
 - docs/changelogs/frontend.md
 - docs/changelogs/backend.md
 - docs/changelogs/packages.md
@@ -145,6 +203,7 @@ AI agents MAY NOT:
 ### 1. Create Duplicate Authority
 
 **PROHIBITED:**
+
 - Define DTOs locally in `src/` or `apps/api/src/`
 - Define Zod schemas locally
 - Define roles/permissions locally
@@ -154,6 +213,7 @@ AI agents MAY NOT:
 - Define business limits as magic numbers
 
 **REQUIRED:**
+
 - Use `@gv/contracts` for DTOs
 - Use `@gv/schemas` for Zod schemas
 - Use `@gv/permissions-ssot` for permissions
@@ -165,6 +225,7 @@ AI agents MAY NOT:
 ### 2. Bypass SSOT
 
 **PROHIBITED:**
+
 - Implement features without updating features-ssot
 - Create pages without updating pages-ssot
 - Define routes without updating routes-ssot
@@ -173,6 +234,7 @@ AI agents MAY NOT:
 - Track analytics without updating analytics-ssot
 
 **REQUIRED:**
+
 - Update the relevant SSOT before implementation
 - Validate SSOT before proceeding
 - Reference SSOT in implementation
@@ -180,12 +242,14 @@ AI agents MAY NOT:
 ### 3. Bypass Validation
 
 **PROHIBITED:**
+
 - Skip SSOT validation
 - Skip governance validation
 - Skip documentation validation
 - Proceed with failed validation
 
 **REQUIRED:**
+
 - Run validation after each SSOT update
 - Run comprehensive validation before completion
 - Fix all validation errors before proceeding
@@ -193,12 +257,14 @@ AI agents MAY NOT:
 ### 4. Bypass Documentation
 
 **PROHIBITED:**
+
 - Create `.md` files outside `docs/`
 - Create undocumented code
 - Create undocumented APIs
 - Skip documentation updates
 
 **REQUIRED:**
+
 - All documentation in `docs/`
 - Document all public APIs
 - Update documentation for all changes
@@ -207,12 +273,14 @@ AI agents MAY NOT:
 ### 5. Bypass Traceability
 
 **PROHIBITED:**
+
 - Make changes without referencing task
 - Make changes without referencing feature
 - Make architectural decisions without ADR
 - Make significant changes without changelog
 
 **REQUIRED:**
+
 - Reference task ID in commit message
 - Reference feature ID in implementation
 - Create ADR for architectural decisions

@@ -32,6 +32,19 @@ interface DashboardData {
     tracedCommits: number;
     coverage: number;
   };
+  gateMetrics: {
+    activeGates: number;
+    completedGates: number;
+    failedGates: number;
+    totalGates: number;
+    byRiskLevel: {
+      low: number;
+      medium: number;
+      high: number;
+      critical: number;
+    };
+    byCategory: Record<string, number>;
+  };
   openViolations: {
     total: number;
     bySeverity: {
@@ -118,11 +131,42 @@ function countDocumentationFiles(): number {
   return count;
 }
 
+function getGateMetrics(): {
+  activeGates: number;
+  completedGates: number;
+  failedGates: number;
+  totalGates: number;
+  byRiskLevel: {
+    low: number;
+    medium: number;
+    high: number;
+    critical: number;
+  };
+  byCategory: Record<string, number>;
+} {
+  // TODO: Integrate with governance-gate package to get actual gate data
+  // For now, return placeholder data
+  return {
+    activeGates: 0,
+    completedGates: 0,
+    failedGates: 0,
+    totalGates: 0,
+    byRiskLevel: {
+      low: 0,
+      medium: 0,
+      high: 0,
+      critical: 0,
+    },
+    byCategory: {},
+  };
+}
+
 function generateDashboardReport(): DashboardData {
   const governanceScore = getGovernanceScore();
   const ssotHealth = getSSOTHealth();
   const driftIssues = getDriftIssues();
   const totalDocs = countDocumentationFiles();
+  const gateMetrics = getGateMetrics();
   
   // Architecture compliance
   let typecheck = false;
@@ -141,6 +185,10 @@ function generateDashboardReport(): DashboardData {
     (ssotHealth.critical * 20) +
     (ssotHealth.warnings * 10) +
     (driftIssues * 5) +
+    (gateMetrics.activeGates * 2) +
+    (gateMetrics.failedGates * 5) +
+    (gateMetrics.byRiskLevel.critical * 10) +
+    (gateMetrics.byRiskLevel.high * 5) +
     (typecheck ? 0 : 20) +
     (lint ? 0 : 15) +
     ((100 - governanceScore.score) * 0.3)
@@ -165,6 +213,7 @@ function generateDashboardReport(): DashboardData {
       tracedCommits: 8,
       coverage: 80,
     },
+    gateMetrics,
     openViolations: {
       total: ssotHealth.critical + ssotHealth.warnings + driftIssues,
       bySeverity: {
@@ -177,6 +226,8 @@ function generateDashboardReport(): DashboardData {
       items: [
         ...(ssotHealth.critical > 0 ? [`${ssotHealth.critical} critical SSOT issues`] : []),
         ...(driftIssues > 0 ? [`${driftIssues} architecture drift issues`] : []),
+        ...(gateMetrics.activeGates > 0 ? [`${gateMetrics.activeGates} active gates awaiting approval`] : []),
+        ...(gateMetrics.failedGates > 0 ? [`${gateMetrics.failedGates} failed gates requiring attention`] : []),
         ...(typecheck ? [] : ['TypeScript type check failures']),
         ...(lint ? [] : ['ESLint violations']),
       ],
@@ -267,6 +318,34 @@ ${data.governanceHealth.status === 'excellent' ? '🟢 Excellent - Governance is
 
 ---
 
+## Governance Gate Metrics
+
+| Metric | Count |
+|--------|-------|
+| **Active Gates** | ${data.gateMetrics.activeGates} 🟡 |
+| **Completed Gates** | ${data.gateMetrics.completedGates} ✅ |
+| **Failed Gates** | ${data.gateMetrics.failedGates} ❌ |
+| **Total Gates** | ${data.gateMetrics.totalGates} |
+
+### Gates by Risk Level
+
+| Risk Level | Count |
+|------------|-------|
+| **Low** | ${data.gateMetrics.byRiskLevel.low} |
+| **Medium** | ${data.gateMetrics.byRiskLevel.medium} |
+| **High** | ${data.gateMetrics.byRiskLevel.high} |
+| **Critical** | ${data.gateMetrics.byRiskLevel.critical} |
+
+### Gates by Category
+
+${Object.keys(data.gateMetrics.byCategory).length > 0 ?
+  Object.entries(data.gateMetrics.byCategory)
+    .map(([category, count]) => `- **${category}**: ${count}`)
+    .join('\n') :
+  'No gates recorded yet'}
+
+---
+
 ## Open Violations
 
 | Severity | Count |
@@ -328,6 +407,12 @@ npm run governance:score
 
 # Run self-healing
 npm run governance:self-heal
+
+# Create a governance gate
+npm run governance:plan -- --title "Title" --description "Description" --requester "Name"
+
+# Run preflight validation
+npm run governance:preflight -- --gate-id "GATE-YYYY-XXXX"
 \`\`\`
 
 ---
@@ -362,6 +447,8 @@ console.log('📊 Summary:\n');
 console.log(`  Governance Score: ${data.governanceHealth.score.toFixed(1)}% (${data.governanceHealth.status})`);
 console.log(`  Risk Score: ${data.riskScore.toFixed(1)}/100`);
 console.log(`  Open Violations: ${data.openViolations.total}`);
-console.log(`  SSOT Health: ${data.ssotHealth.healthy}/${data.ssotHealth.total} healthy\n`);
+console.log(`  SSOT Health: ${data.ssotHealth.healthy}/${data.ssotHealth.total} healthy`);
+console.log(`  Active Gates: ${data.gateMetrics.activeGates}`);
+console.log(`  Completed Gates: ${data.gateMetrics.completedGates}\n`);
 
 process.exit(0);

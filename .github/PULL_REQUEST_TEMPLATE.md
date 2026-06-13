@@ -18,64 +18,76 @@ Brief description of what this PR does.
 - [ ] @gv/translations
 - [ ] @gv/business-rules
 - [ ] @gv/governance-ssot
-- [ ] Other: ___________
+- [ ] Other: ****\_\_\_****
 
 ### SSOT Updates
 
 For each affected SSOT, describe the changes made:
 
 **@gv/features-ssot:**
+
 - [ ] Feature definition added/updated
 - [ ] Feature registry updated
 - [ ] Validation passed
 
 **@gv/pages-ssot:**
+
 - [ ] Page definition added/updated
 - [ ] Page registry updated
 - [ ] Validation passed
 
 **@gv/routes-ssot:**
+
 - [ ] Route definition added/updated
 - [ ] Route registry updated
 - [ ] Validation passed
 
 **@gv/navigation-ssot:**
+
 - [ ] Navigation item added/updated
 - [ ] Navigation registry updated
 - [ ] Validation passed
 
 **@gv/forms-ssot:**
+
 - [ ] Form definition added/updated
 - [ ] Form registry updated
 - [ ] Validation passed
 
 **@gv/permissions-ssot:**
+
 - [ ] Permission added/updated
 - [ ] Permission registry updated
 - [ ] Validation passed
 
 **@gv/analytics-ssot:**
+
 - [ ] Analytics event added/updated
 - [ ] Analytics registry updated
 - [ ] Validation passed
 
 **@gv/contracts:**
+
 - [ ] DTO added/updated
 - [ ] Validation passed
 
 **@gv/schemas:**
+
 - [ ] Schema added/updated
 - [ ] Validation passed
 
 **@gv/translations:**
+
 - [ ] Translation added/updated
 - [ ] Validation passed
 
 **@gv/business-rules:**
+
 - [ ] Business rule added/updated
 - [ ] Validation passed
 
 **@gv/governance-ssot:**
+
 - [ ] Policy added/updated
 - [ ] Workflow added/updated
 - [ ] Validator added/updated
@@ -132,10 +144,13 @@ Describe how this was tested:
 
 ## Governance Validation
 
+- [ ] Governance Gate ID provided (REQUIRED)
+- [ ] Governance Gate is approved
 - [ ] `npm run validate:governance:comprehensive` passed
 - [ ] `npm run ssot:doctor` passed
 - [ ] `npm run detect:drift` passed
 - [ ] `npm run governance:score` passed
+- [ ] `npm run governance:preflight` passed
 
 ## Checklist
 
