@@ -14,7 +14,7 @@ const journeyPrefix: Record<string, string> = {
   seller: '/seller',
   admin: '/admin',
   service: '/service',
-  guest: '/auth',
+  guest: '/guest',
 }
 
 function slugify(input: string): string {
@@ -27,15 +27,7 @@ function slugify(input: string): string {
 }
 
 function computeRoute(screen: StitchScreen): string {
-  let prefix = journeyPrefix[screen.journey] ?? '/'
-
-  if (screen.journey === 'guest') {
-    const t = (screen.title || '').toLowerCase()
-    if (t.includes('onboarding')) prefix = '/onboarding'
-    else if (t.includes('role')) prefix = '/onboarding'
-    else prefix = '/auth'
-  }
-
+  const prefix = journeyPrefix[screen.journey] ?? '/'
   const slug = slugify(screen.title || screen.name || screen.id)
   return `${prefix}/${slug}`
 }
