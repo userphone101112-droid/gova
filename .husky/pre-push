@@ -1,4 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
 npm run validate:governance:comprehensive
 npm run ssot:doctor
 npm run detect:drift
 npm run governance:preflight
+npm run governance:firewall -- echo "preflight-check"

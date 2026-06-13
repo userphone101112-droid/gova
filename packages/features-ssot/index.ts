@@ -241,6 +241,23 @@ export const featureRegistry: Record<string, FeatureDefinition> = {
     createdAt: '2026-06-13T00:00:00.000Z',
     updatedAt: '2026-06-13T00:00:00.000Z',
   },
+  'marketplace-navigation': {
+    id: 'marketplace-navigation',
+    name: 'Marketplace Navigation',
+    description: 'Dynamic role-based navigation system for marketplace with buyer, seller, and admin roles',
+    owner: 'Commerce Team',
+    status: 'in_development',
+    permissions: ['marketplace.read'],
+    routes: ['/home', '/cart', '/seller/dashboard', '/admin/dashboard', '/notifications', '/profile'],
+    forms: [],
+    analyticsEvents: ['navigation.click', 'navigation.view'],
+    documentationRefs: ['/docs/modules/marketplace-navigation.md'],
+    adrRefs: [],
+    dependencies: ['users', 'products', 'merchants', 'orders', 'notifications'],
+    version: '0.1.0',
+    createdAt: '2026-06-13T01:10:00.000Z',
+    updatedAt: '2026-06-13T01:10:00.000Z',
+  },
 };
 
 // ============================================================================
@@ -368,6 +385,3 @@ export function isFeatureEnabled(featureId: string, flagManager?: { isEnabled: (
 // ============================================================================
 // EXPORTS
 // ============================================================================
-
-export type { FeatureDefinition, FeatureStatus };
-export { featureDefinitionSchema, featureStatusEnum };

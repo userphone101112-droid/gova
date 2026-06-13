@@ -200,6 +200,23 @@ const result = validateGovernanceSSOT();
 
 AI agents MAY NOT:
 
+### 0. Bypass Governance Firewall
+
+**PROHIBITED:**
+
+- Execute any command without firewall approval
+- Set GOVERNANCE_MODE=OFF
+- Disable firewall hooks
+- Bypass firewall checks
+- Ignore firewall blocks
+
+**REQUIRED:**
+
+- All operations must pass through firewall
+- Set GATE_ID before any operation
+- Respect firewall blocks
+- Fix violations before retrying
+
 ### 1. Create Duplicate Authority
 
 **PROHIBITED:**
@@ -370,10 +387,15 @@ Before completing any task, AI agents MUST verify:
 
 Governance is enforced through:
 
-1. **Pre-commit hooks**: Run `npm run validate:governance` before each commit
-2. **GitHub Actions**: Run all validations in CI/CD pipeline
-3. **Manual validation**: AI agents must run `npm run validate:all` before completing
-4. **Compliance reporting**: AI agents must produce compliance reports
+1. **Governance Firewall**: Hard execution blocker for all operations
+2. **Pre-commit hooks**: Run `npm run governance:preflight` and firewall before each commit
+3. **Pre-push hooks**: Run comprehensive validation and firewall before each push
+4. **GitHub Actions**: Run firewall preflight before build in CI/CD pipeline
+5. **Package.json scripts**: All npm scripts wrapped with firewall
+6. **File system watcher**: Daemon monitors for unauthorized changes
+7. **Runtime guard**: Wraps Node.js, Next.js, build, test execution
+8. **Manual validation**: AI agents must run `npm run validate:all` before completing
+9. **Compliance reporting**: AI agents must produce compliance reports
 
 ---
 
@@ -381,12 +403,15 @@ Governance is enforced through:
 
 If a governance violation is detected:
 
-1. The validation will fail with a descriptive error message
-2. The commit will be blocked
-3. The AI agent must fix the violation by:
+1. The firewall will block the operation immediately
+2. The violation will be logged to `docs/audits/governance-violations/`
+3. Auto-rollback may be performed for file changes
+4. The operation will fail with a descriptive error message
+5. The AI agent must fix the violation by:
+   - Creating or updating the required Gate
    - Updating the missing SSOT
-   - Running validation to confirm the fix
-   - Re-attempting the commit
+   - Running firewall preflight to confirm the fix
+   - Re-attempting the operation
 
 ---
 
@@ -409,6 +434,7 @@ By operating in this repository, AI agents acknowledge and agree to this contrac
 
 ---
 
-**Contract Version:** 1.0.0  
-**Effective Date:** 2026-06-13  
+**Contract Version:** 2.0.0
+**Effective Date:** 2026-06-13
 **Governance SSOT:** @gv/governance-ssot
+**Governance Firewall:** @gv/governance-firewall

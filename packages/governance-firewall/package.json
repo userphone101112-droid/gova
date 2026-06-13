@@ -1,0 +1,19 @@
+{
+  "name": "@gv/governance-firewall",
+  "version": "1.0.0",
+  "description": "Governance Firewall - Hard execution enforcement layer that blocks unauthorized operations",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "validate": "tsx scripts/validate-firewall.ts"
+  },
+  "keywords": [
+    "governance",
+    "firewall",
+    "enforcement",
+    "execution",
+    "blocker"
+  ],
+  "author": "Platform Architect",
+  "license": "MIT"
+}
