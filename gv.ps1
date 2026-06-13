@@ -9,7 +9,8 @@ param(
     [switch]$Status,
     [string]$Message = "",
     [switch]$Help,
-    [switch]$NoVerify
+    [switch]$NoVerify,
+    [switch]$CommitAndPush
 )
 
 $KEY_FILE = "$env:USERPROFILE\.ssh_local\gova\.git_deploy_key"
@@ -72,6 +73,55 @@ function Run-Push {
     }
 }
 
+function Run-CommitAndPush {
+    if (-not (Verify-Key)) { return }
+
+    # Generate timestamp-based commit message
+    $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $commitMessage = "Auto-commit: $timestamp"
+
+    # Stage all changes
+    Write-Host "Staging all changes..." -ForegroundColor Cyan
+    git add -A
+
+    # Run checks
+    Write-Host "Running lint check..." -ForegroundColor Cyan
+    $lintResult = npm run lint 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "[ERROR] Lint check failed" -ForegroundColor Red
+        Write-Host $lintResult
+        return
+    }
+    Write-Host "[OK] Lint check passed" -ForegroundColor Green
+
+    Write-Host "Running typecheck..." -ForegroundColor Cyan
+    $typecheckResult = npm run typecheck 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "[ERROR] Typecheck failed" -ForegroundColor Red
+        Write-Host $typecheckResult
+        return
+    }
+    Write-Host "[OK] Typecheck passed" -ForegroundColor Green
+
+    # Commit
+    Write-Host "Committing: $commitMessage" -ForegroundColor Cyan
+    git commit -m $commitMessage
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "[INFO] Nothing new to commit, pushing existing commits..." -ForegroundColor Yellow
+    }
+
+    # Push
+    Write-Host "Pushing to origin/main..." -ForegroundColor Cyan
+    $output = git push origin main 2>&1
+    Write-Host $output
+
+    if ($output -match "main -> main" -or $output -match "up-to-date") {
+        Write-Host "[OK] Commit and push successful" -ForegroundColor Green
+    } else {
+        Write-Host "[ERROR] Push may have failed. Check output above." -ForegroundColor Red
+    }
+}
+
 function Run-Pull {
     if (-not (Verify-Key)) { return }
 
@@ -95,20 +145,23 @@ function Show-Help {
 gova Git Helper (isolated from Windows SSH/credential settings)
 
 Usage:
-    .\gv.ps1 -Setup              Configure SSH deploy key locally
-    .\gv.ps1 -Push               Push current commits to origin/main
-    .\gv.ps1 -Push -NoVerify      Push without pre-commit/pre-push hooks
-    .\gv.ps1 -Pull               Pull latest from origin/main
-    .\gv.ps1 -Status             Show git status and local config
+    .\gv.ps1 -Setup                  Configure SSH deploy key locally
+    .\gv.ps1 -Push                   Push current commits to origin/main
+    .\gv.ps1 -Push -NoVerify          Push without pre-commit/pre-push hooks
+    .\gv.ps1 -CommitAndPush          Stage, lint, typecheck, commit, and push
+    .\gv.ps1 -Pull                   Pull latest from origin/main
+    .\gv.ps1 -Status                 Show git status and local config
 
 "@
 }
 
 # Main
-if ($Help -or (-not ($Setup -or $Push -or $Pull -or $Status))) {
+if ($Help -or (-not ($Setup -or $Push -or $Pull -or $Status -or $CommitAndPush))) {
     Show-Help
 } elseif ($Setup) {
     Run-Setup
+} elseif ($CommitAndPush) {
+    Run-CommitAndPush
 } elseif ($Push) {
     Run-Push
 } elseif ($Pull) {

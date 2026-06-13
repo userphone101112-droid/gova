@@ -16,7 +16,7 @@
       }
     },
     {
-      "name": "🔧 git:setup  — Configure SSH (isolated from Windows)",
+      "name": "🔧 git:setup  — Configure SSH (${env:USERNAME} ${env:DATE} ${env:TIME})",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "powershell",
@@ -25,7 +25,7 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "⬆ git:push   — Push to origin/main",
+      "name": "⬆ git:push   — Push to origin/main (${env:USERNAME} ${env:DATE} ${env:TIME})",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "powershell",
@@ -34,7 +34,7 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "⬇ git:pull   — Pull from origin/main",
+      "name": "⬇ git:pull   — Pull from origin/main (${env:USERNAME} ${env:DATE} ${env:TIME})",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "powershell",
@@ -43,11 +43,29 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "📋 git:status — Show git status & local config",
+      "name": "📋 git:status — Show git status & local config (${env:USERNAME} ${env:DATE} ${env:TIME})",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "powershell",
       "runtimeArgs": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/gv.ps1", "-Status"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "⬆ git:push -NoVerify — Push without checks (${env:USERNAME} ${env:DATE} ${env:TIME})",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/gv.ps1", "-Push", "-NoVerify"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "⬆ git:commitAndPush — Stage, check, commit, push (${env:USERNAME} ${env:DATE} ${env:TIME})",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/gv.ps1", "-CommitAndPush"],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal"
     }
